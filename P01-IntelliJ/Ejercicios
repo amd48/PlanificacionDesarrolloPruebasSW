@@ -1,0 +1,564 @@
+=============================================
+Ejercicio 1 a
+
+							Vista Project
+						        ________________
+
+P01-IntelliJ   --> Directorio/Carpeta del proyecto Maven
+
+	.idea  --------------------------------------------> La configuración de los datos contenidos en un proyecto se puede almacenar en un directorio denominado .idea, y es creado y mantenido automáticamente por IntelliJ.
+			libraries
+						Maven__org_apiguardian_apiguardian_api_1_1_0.xml
+						Maven__org_junit_jupiter_junit_jupiter_api_5_5_2.xml
+						Maven__org_junit_jupiter_junit_jupiter_engine_5_5_2.xml
+						Maven__org_junit_platform_junit_platform_commons_1_5_2.xml
+						Maven__org_junit_platform_junit_platform_engine_1_5_2.xml
+						Maven__org_opentest4j_opentest4j_1_2_0.xml
+				.gitignore
+				compiler.xml
+				encodings.xml
+				misc.xml			
+				modules.xml
+				vcs.xml
+				workspace.xml
+
+	src  --------------------------------------------> Directorio de fuentes: contiene todos los artefactos necesarios para construir el proyecto
+			main
+				java
+					ppss
+						DataArray
+						Matricula
+						Triangulo
+
+					resources   --------------------------------------------> Ficheros adicioneales usados por el codigo fuente  (OPCIONAL, tambien puede aparecer en la parte de test)
+			
+			test
+				java  --------------------------------------------> Codigo fuente de las pruebas de desarroyo
+					ppss
+						MatriculaTest
+						TrianguloTest
+			
+			P01-IntelliJ.iml   -->  Un Módulo es una unidad funcional que podemos compilar, probar y depurar de forma independiente. Los módulos contienen, por lo tanto, artefactos tales como código fuente, scripts de 
+								   compilación, tests, descriptores de despliegue, y documentación. Sin embargo un módulo no puede existir fuera del contexto de un proyecto. La información de configuración de un módulo se
+								   almacena en un fichero denominado     .iml    Por defecto, este fichero se crea automáticamente en la raíz del directorio que contiene dicho módulo. Un proyecto IntelliJ puede contener uno o varios módulos.
+			pom.xml
+
+External Libraries
+	< 1.8 >
+	Maven: org.apiguardian:apiguardian-api:1.1.0
+	Maven: org.junit.jupiter:junit-jupiter-api:5.5.2
+	Maven: org.junit.jupiter:junit-jupiter-engine:5.5.2
+	Maven: org.junit.platform:junit-platform-commons:1.5.2
+	Maven: org.junit.platform:junit-platform-engine:1.5.2
+	Maven: org.opentest4j:opentest4j:1.2.0
+	Scratches and Consoles
+
+							Vista Project File
+							________________
+
+P01-IntelliJ   
+
+	.idea      
+			libraries
+						Maven__org_apiguardian_apiguardian_api_1_1_0.xml
+						Maven__org_junit_jupiter_junit_jupiter_api_5_5_2.xml
+						Maven__org_junit_jupiter_junit_jupiter_engine_5_5_2.xml
+						Maven__org_junit_platform_junit_platform_commons_1_5_2.xml
+						Maven__org_junit_platform_junit_platform_engine_1_5_2.xml
+						Maven__org_opentest4j_opentest4j_1_2_0.xml
+				.gitignore
+				compiler.xml
+				encodings.xml
+				misc.xml			
+				modules.xml
+				vcs.xml
+				workspace.xml
+	src
+			main
+				java
+					ppss
+						DataArray
+						Matricula
+						Triangulo
+
+					resources
+			
+			test
+				java
+					ppss
+						MatriculaTest
+						TrianguloTest
+			
+			P01-IntelliJ.iml
+			pom.xml
+					
+
+
+					LA DIFERENCIA ENTRE LA VISTA PROJECT  Y PROJECT FILES ES QUE:
+							 En la  vista PROJECT FILES NOOOOO aparecen LAS LIBRERIAS EXTERNAS del projecto, ya que solo aparcen las carpetas fisicas del disco duro
+==================================================================================================================================================
+
+==================================================================================================================================================
+Ejercicio 1 b
+
+	El proceso de construcción de un sistema está formado por una secuencia de acciones definidas en uno o más “build scripts”. Un build script puede consistir en una secuencia de compilación, pruebas, empaquetado y despliegue
+
+	COORDENADAS DE UN ARTEFACTO EN MAVEN    -->	        GROUPID   :   ARTIFACTID   :   PACKAGING    :    VERSION
+
+Indica cuáles son sus coordenadas: tanto las del proyecto, como la de los dos artefactos referenciados en él
+
+coordenadas del artefacto del projecto: 						practica1.ppss:P01-IntelliJ:jar:1.0-SNAPSHOT
+coordenadas del artefacto de la seccion de dependencias:	org.junit.jupiter:junit-jupiter-engine:jar:5.5.2
+coordenadas del artefacto de la seccion de construccion:		org.apache.maven.plugins:>maven-surefire-plugin:jar:2.22.2
+
+¿Por qué nuestro proyecto tiene definidas unas coordenadas?
+		La identificación del artefacto se utiliza para almacenar y localizar físicamente el artefacto en el repositorio correspondiente
+		Cualquier artefacto utilizado por Maven se identifica por sus COORDENADAS
+
+
+¿Por qué los artefactos de nuestro pom están en secciones (etiquetas) diferentes y qué tipo de ficheros son?
+	
+		POM.XML -->	COORDENADAS				<groupiD> <artefactiD>  <package> <version>  	"Coordenadas del proyecto"
+						PROPIEDADES    				<properties>									   	"Variables usadas en el POM"
+						DEPENDENCIAS 				<dependencies>									"Librerias usadas en el codigo del proyecto"
+						PROCESO CONSTRUCCION 	<buid>												"Plugins con las goals que se ejecutaran en las fases de algun ciclo"
+
+		
+	PROPIEDADES    				<properties>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+				A partir de Maven 3 es OBLIGATORIO especificar en el pom.xml un valor para la propiedad “project.build.sourceEncoding”, por lo que esta línea aparecerá en todos los ficheros pom.xml de nuestros proyectos.
+
+
+
+	Artefacto de las dependencias
+			<dependencies>
+			        <dependency>
+			            <groupId>org.junit.jupiter</groupId>
+			            <artifactId>junit-jupiter-engine</artifactId>
+			            <version>5.5.2</version>
+			            <scope>test</scope> ----------------------------------------------------------------------------------------> "test"  Dicho valor indica que el artefacto en cuestión sólo se necesita durante la compilación de los tests.
+			        </dependency>																		Si se omite esta etiqueta su valor por defecto es compile, significa que es necesario para la compilacion de los fuentes del proyecto
+			</dependencies>
+
+			
+Averigua qué versión viene incluida por defecto comentando el plugin en el pom, y consultando la información del plugin desde la ventana Maven Projects.
+					2.12.4
+==================================================================================================================================================
+
+
+
+==================================================================================================================================================
+Ejercicio 1 c
+	Observada la clase triangulo
+==================================================================================================================================================
+
+
+==================================================================================================================================================
+Ejercicio 1 d
+Identificador de los 
+casos de prueba   		Dato 1  Dato 2   Dato 3  	Res_Esperado  Res_Real
+	
+	id1					1		1		1			Equilatero		 Equiatero
+
+	id2					1		1		11			No es ..		No es ..
+	
+	id3					1		2		0			Rango			Rango
+
+	id4					10 		10 		14			Isosceles		Isosceles									
+==================================================================================================================================================
+
+
+==================================================================================================================================================
+Ejercicio 1 e
+
+	@Test
+    public void testTipo_trianguloC1() {
+       a = 1;
+       b = 1;
+       c = 1;
+       resultadoEsperado = "Equilatero";
+       resultadoReal = tri.tipo_triangulo(a,b,c);
+       assertEquals(resultadoEsperado, resultadoReal);
+
+	Algoritmo
+		1 Datos entrada
+		2 Esperado
+		3 LLamada al metodo que nos devuelve el resultado real
+		4 AssertEqual con Esperado y Real    
+}
+								
+==================================================================================================================================================
+
+==================================================================================================================================================
+
+Ejercicio 2 A
+
+Ejecutar fase compile
+
+/usr/local/jdk1.8.0_231/bin/java -Dmaven.multiModuleProjectDirectory=/home/ppss/Escritorio/PPSS/ppss-2020-g4-mas-devesa/P01-IntelliJ -Dmaven.home=/usr/local/apache-maven-3.6.3 -Dclassworlds.conf=/usr/local/apache-maven-3.6.3/bin/m2.conf -Dmaven.ext.class.path=/usr/local/idea-IU-193.5233.102/plugins/maven/lib/maven-event-listener.jar -javaagent:/usr/local/idea-IU-193.5233.102/lib/idea_rt.jar=43365:/usr/local/idea-IU-193.5233.102/bin -Dfile.encoding=UTF-8 -classpath /usr/local/apache-maven-3.6.3/boot/plexus-classworlds-2.6.0.jar:/usr/local/apache-maven-3.6.3/boot/plexus-classworlds.license org.codehaus.classworlds.Launcher -Didea.version2019.3 compile
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< practica1.ppss:P01-IntelliJ >---------------------
+[INFO] Building P01-IntelliJ 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ P01-IntelliJ ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ P01-IntelliJ ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /home/ppss/Escritorio/PPSS/ppss-2020-g4-mas-devesa/P01-IntelliJ/target/classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  7.161 s
+[INFO] Finished at: 2020-01-31T21:42:26+01:00
+[INFO] ------------------------------------------------------------------------
+
+
+Aparece el directorio target
+
+target
+	classes
+		ppss
+			DataArray.class
+			Matricula.class
+			Triangulo.class		
+		generated-sources
+			annotations
+		maven-status
+			maven-compiler-plugin
+				compile
+					default-compile
+						createdFiles.lst
+							inputFiles.lst
+
+
+Ejecutar fase clean
+
+/usr/local/jdk1.8.0_231/bin/java -Dmaven.multiModuleProjectDirectory=/home/ppss/Escritorio/PPSS/ppss-2020-g4-mas-devesa/P01-IntelliJ -Dmaven.home=/usr/local/apache-maven-3.6.3 -Dclassworlds.conf=/usr/local/apache-maven-3.6.3/bin/m2.conf -Dmaven.ext.class.path=/usr/local/idea-IU-193.5233.102/plugins/maven/lib/maven-event-listener.jar -javaagent:/usr/local/idea-IU-193.5233.102/lib/idea_rt.jar=39105:/usr/local/idea-IU-193.5233.102/bin -Dfile.encoding=UTF-8 -classpath /usr/local/apache-maven-3.6.3/boot/plexus-classworlds-2.6.0.jar:/usr/local/apache-maven-3.6.3/boot/plexus-classworlds.license org.codehaus.classworlds.Launcher -Didea.version2019.3 clean
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< practica1.ppss:P01-IntelliJ >---------------------
+[INFO] Building P01-IntelliJ 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ P01-IntelliJ ---
+[INFO] Deleting /home/ppss/Escritorio/PPSS/ppss-2020-g4-mas-devesa/P01-IntelliJ/target
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.890 s
+[INFO] Finished at: 2020-01-31T21:55:06+01:00
+[INFO] ------------------------------------------------------------------------
+
+
+
+Limpia el directorio target
+
+
+
+Ahora vuelve a compilar el proyecto. Fíjate en la secuencia de acciones que se muestran en la ventana inferior y en que NO se han ejecutado los tests.
+
+/usr/local/jdk1.8.0_231/bin/java -Dmaven.multiModuleProjectDirectory=/home/ppss/Escritorio/PPSS/ppss-2020-g4-mas-devesa/P01-IntelliJ -Dmaven.home=/usr/local/apache-maven-3.6.3 -Dclassworlds.conf=/usr/local/apache-maven-3.6.3/bin/m2.conf -Dmaven.ext.class.path=/usr/local/idea-IU-193.5233.102/plugins/maven/lib/maven-event-listener.jar -javaagent:/usr/local/idea-IU-193.5233.102/lib/idea_rt.jar=41617:/usr/local/idea-IU-193.5233.102/bin -Dfile.encoding=UTF-8 -classpath /usr/local/apache-maven-3.6.3/boot/plexus-classworlds-2.6.0.jar:/usr/local/apache-maven-3.6.3/boot/plexus-classworlds.license org.codehaus.classworlds.Launcher -Didea.version2019.3 compile
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< practica1.ppss:P01-IntelliJ >---------------------
+[INFO] Building P01-IntelliJ 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ P01-IntelliJ ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ P01-IntelliJ ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /home/ppss/Escritorio/PPSS/ppss-2020-g4-mas-devesa/P01-IntelliJ/target/classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.536 s
+[INFO] Finished at: 2020-01-31T21:58:21+01:00
+[INFO] ------------------------------------------------------------------------
+===================================================================================================================================================
+
+
+
+
+
+===================================================================================================================================================
+Ejercicio 2b  y c
+
+		/usr/local/jdk1.8.0_231/bin/java -Dmaven.multiModuleProjectDirectory=/home/ppss/Escritorio/PPSS/ppss-2020-g4-mas-devesa/P01-IntelliJ -Dmaven.home=/usr/local/apache-maven-3.6.3 -Dclassworlds.conf=/usr/local/apache-maven-3.6.3/bin/m2.conf -Dmaven.ext.class.path=/usr/local/idea-IU-193.5233.102/plugins/maven/lib/maven-event-listener.jar -javaagent:/usr/local/idea-IU-193.5233.102/lib/idea_rt.jar=42487:/usr/local/idea-IU-193.5233.102/bin -Dfile.encoding=UTF-8 -classpath /usr/local/apache-maven-3.6.3/boot/plexus-classworlds-2.6.0.jar:/usr/local/apache-maven-3.6.3/boot/plexus-classworlds.license org.codehaus.classworlds.Launcher -Didea.version2019.3 test
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< practica1.ppss:P01-IntelliJ >---------------------
+[INFO] Building P01-IntelliJ 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ P01-IntelliJ ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ P01-IntelliJ ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ P01-IntelliJ ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/ppss/Escritorio/PPSS/ppss-2020-g4-mas-devesa/P01-IntelliJ/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ P01-IntelliJ ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 2 source files to /home/ppss/Escritorio/PPSS/ppss-2020-g4-mas-devesa/P01-IntelliJ/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ P01-IntelliJ ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running ppss.TrianguloTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.147 s - in ppss.TrianguloTest
+[INFO] Running ppss.MatriculaTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s - in ppss.MatriculaTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  8.045 s
+[INFO] Finished at: 2020-01-31T22:12:59+01:00
+[INFO] ------------------------------------------------------------------------
+===================================================================================================================================================
+
+
+===================================================================================================================================================
+Ejercico 2d
+
+
+El único test que he visto conveniente añadir es el de comprobar el rango superior  del parametro
+
+Los test C2 y C3 son necesarios y no se solapan entre si
+	El 3 comprueba el rango iferior del valor del parametro
+	El 2 la norma que hay que cumplir para ser triangulo
+
+No es necesario comprobar los rangos de los tres parametros ya que el codigo de la clase triangulo es igual para las tres parametros
+No es necesario comprobar todas las combinaciones que no cumplen ser triangulo ya que el codigo de la clase triangulo es igual para las tres comprobaciones
+
+===================================================================================================================================================
+
+
+==============================================================================
+Ejercicio 3 (completo)
+
+
+Segun la tabla una persona de entre 51 y 64 deberia pagar tasa-100 sin importar si es familia numerosa
+o es repetidor
+
+El siguiente test falla:
+
+@Test
+    public void testCalculaTasaMatricula3()
+    {
+        edad = 51;
+        familiaNumerosa = true;
+        repetidor = false;
+        resultadoEsperado = 400.00f;
+        resultadoReal = mat.calculaTasaMatricula(edad,familiaNumerosa,repetidor);
+        //el tercer parámetro del método Assert.assertEquals es necesario si estamos comparando "floats"
+        //en este caso el método devuelve cierto si:
+        //resultadoEsperado = resultadoReal +/- 0.002
+        assertEquals(resultadoEsperado, resultadoReal,0.002f);
+    }
+
+    //Teniendo en cuenta que para una persona de 51 años no debe importar si es familia numerosa,
+            //el resultado esperado segun la tabla es tasa - 100 (400), y el metodo que devuelve 150
+            //  expected: <400.0> but was: <150.0>
+
+            /*
+               Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.002 s <<< FAILURE!
+               - in ppss.MatriculaTest
+               testCalculaTasaMatricula3  Time elapsed: 0.001 s  <<< FAILURE!
+
+    ======================================================================================
+    ======================================================================================
+
+    El test 5 y 6 demuestran que un persona de entre 25 y 50 de famlia numerosa
+    pagaria lo mismo en el caso de repetir, en la tabla no indica tal caso por lo que
+    entiendo que este tipoo de alumno paga siempre lo mismo , sin importar que repita
+
+    @Test
+        public void testCalculaTasaMatricula5()
+        {
+            edad = 30;
+            familiaNumerosa = true;
+            repetidor = false;
+            resultadoEsperado = 250.00f;
+            resultadoReal = mat.calculaTasaMatricula(edad,familiaNumerosa,repetidor);
+            //el tercer parámetro del método Assert.assertEquals es necesario si estamos comparando "floats"
+            //en este caso el método devuelve cierto si:
+            //resultadoEsperado = resultadoReal +/- 0.002
+            assertEquals(resultadoEsperado, resultadoReal,0.002f);
+        }
+
+        @Test
+        public void testCalculaTasaMatricula6()
+        {
+            edad = 30;
+            familiaNumerosa = true;
+            repetidor = true;
+            resultadoEsperado = 250.00f;
+            resultadoReal = mat.calculaTasaMatricula(edad,familiaNumerosa,repetidor);
+            //el tercer parámetro del método Assert.assertEquals es necesario si estamos comparando "floats"
+            //en este caso el método devuelve cierto si:
+            //resultadoEsperado = resultadoReal +/- 0.002
+            assertEquals(resultadoEsperado, resultadoReal,0.002f);
+        }
+
+
+        SE PODRIAN AÑADIR TODOS LAS POSIBLES TASAS YA QUE EL NUMERO DE CASOS NO ES ELEVADO
+
+
+
+================================================================================================
+================================================================================================
+
+Ejercicio 4A
+
+Al ejecutar la fase package aparece en el directorio  TARGET
+el empaquetado JAR y la carpeta maven archive
+
+En la carpeta maven-archiver aparece el archivo pom.properties, en el que aparce
+
+#Generated by Maven
+#Mon Feb 03 10:20:11 CET 2020
+version=1.0-SNAPSHOT
+groupId=practica1.ppss
+artifactId=P01-IntelliJ
+
+que coincide con la definicion de las coordenadas del POM.XML
+
+    <groupId>practica1.ppss</groupId>
+    <artifactId>P01-IntelliJ</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+
+ --------------------< practica1.ppss:P01-IntelliJ >---------------------
+[INFO] Building P01-IntelliJ 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ P01-IntelliJ ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ P01-IntelliJ ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ P01-IntelliJ ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/ppss/Escritorio/PPSS/ppss-2020-g4-mas-devesa/P01-IntelliJ/src/test/resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ P01-IntelliJ ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ P01-IntelliJ ---
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running ppss.TrianguloTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.212 s - in ppss.TrianguloTest
+[INFO] Running ppss.MatriculaTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s - in ppss.MatriculaTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO]
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ P01-IntelliJ ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  10.876 s
+[INFO] Finished at: 2020-02-03T10:33:50+01:00
+[INFO] ------------------------------------------------------------------------
+
+
+Al intriducir un error en los test y ejecutar la fase package, no se genera el ejecutable
+ya que al fallar en la fase de test no se genera la siguiente fase
+
+Y pasa lo mismo con la fase de compilacion, al dar un fallo no se ejcutan las siguientes fases
+
+
+
+
+================================================================================================
+Ejercicio 4B
+
+ --- maven-jar-plugin:2.4:jar (default-jar) @ P01-IntelliJ ---
+[INFO] Building jar: /home/ppss/Escritorio/PPSS/ppss-2020-g4-mas-devesa/P01-IntelliJ/target/P01-IntelliJ-1.0-SNAPSHOT.jar
+[INFO]
+
+********************************************************************************
+**********              LO QUE GENERA LA FASE INSTALL          *****************
+********************************************************************************
+
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ P01-IntelliJ ---
+
+[INFO] Installing /home/ppss/Escritorio/PPSS/ppss-2020-g4-mas-devesa/P01-IntelliJ/target/P01-IntelliJ-1.0-SNAPSHOT.jar to /home/ppss/.m2/repository/practica1/ppss/P01-IntelliJ/1.0-SNAPSHOT/P01-IntelliJ-1.0-SNAPSHOT.jar
+[INFO] Installing /home/ppss/Escritorio/PPSS/ppss-2020-g4-mas-devesa/P01-IntelliJ/pom.xml to /home/ppss/.m2/repository/practica1/ppss/P01-IntelliJ/1.0-SNAPSHOT/P01-IntelliJ-1.0-SNAPSHOT.pom
+
+
+********************************************************************************
+********************************************************************************
+********************************************************************************
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+
+P01-IntelliJ
+Dependencies
+org.junit.platform:junit-platform-engine:1.5.2
+
+********    RUTA JUNIT REPOSITORIO LOCAL    *************
+/home/ppss/.m2/repository/junit/junit
+
+
+
+
+==============================================
+==============================================
+
+Ejercicio 5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

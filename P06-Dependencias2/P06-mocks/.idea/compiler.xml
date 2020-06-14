@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="reserva" />
+        <module name="premio" />
+        <module name="gestorLlamadasMocks" />
+        <module name="alquiler" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="alquiler" target="1.8" />
+      <module name="gestorLlamadasMocks" target="1.8" />
+      <module name="premio" target="1.8" />
+      <module name="reserva" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

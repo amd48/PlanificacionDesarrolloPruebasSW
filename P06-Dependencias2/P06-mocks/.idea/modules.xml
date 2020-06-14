@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/alquiler/alquiler.iml" filepath="$PROJECT_DIR$/alquiler/alquiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gestorLlamadasMocks/gestorLlamadasMocks.iml" filepath="$PROJECT_DIR$/gestorLlamadasMocks/gestorLlamadasMocks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/premio/premio.iml" filepath="$PROJECT_DIR$/premio/premio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reserva/reserva.iml" filepath="$PROJECT_DIR$/reserva/reserva.iml" />
+    </modules>
+  </component>
+</project>
